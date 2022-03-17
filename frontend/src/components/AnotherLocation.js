@@ -8,10 +8,12 @@ const AnotherLocation = () => {
     <form action="#" className='another-location'>
         <SidebarCategory category="Another Location" />
 
-        <input type="text" name='' />
-        <button type="submit">
-          <FontAwesomeIcon icon={faMagnifyingGlassLocation} /> 
-        </button>
+        <div className="search">
+          <input type="text" name='search-location' placeholder='London, UK...' />
+          <button type="submit">
+            <FontAwesomeIcon icon={faMagnifyingGlassLocation} /> 
+          </button>
+        </div>
     </form>
   )
 }
