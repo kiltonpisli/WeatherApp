@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+$normalWhite: #fff9;
+$activeWhite: #fff;
 
 body {
   margin: 0;
@@ -122,21 +124,29 @@ code {
           padding: 15px 0;
           background: #0000;
           border: 0;
-          border-bottom: 1px solid #fff;
-          color: #fff;
+          border-bottom: 1px solid $normalWhite;
+          color: $activeWhite;
           outline: 0;
 
+          &:focus{
+            border-bottom: 1px solid $activeWhite;
+          }
           &::placeholder{
-            color: #fff;
+            color: $normalWhite;
           }
         }
         button{
           padding: 20px;
           font-size: 25px;
-          color: #fff;
+          color: $normalWhite;
           background: #fff3;
           border-radius: 5px;
+          transition: .3s;
           border: 0;
+
+          &:hover{
+            color: $activeWhite;
+          }
         }
       }
     }
@@ -161,6 +171,12 @@ code {
           border-radius: 5px;
           max-height: 150px;
           padding: 10px;
+          color: $normalWhite;
+          transition: .3s;
+
+          &:hover{
+            color: $activeWhite;
+          }
 
           svg{
             font-size: 25px;
