@@ -38,7 +38,7 @@ code {
 
     .current-weather{
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       gap: 15px;
       justify-content: flex-start;
 
@@ -46,6 +46,7 @@ code {
         font-size: 85px;
         font-weight: 100;
         margin: 0;
+        line-height: 65px;
 
         sup{
           margin-left: -15px;

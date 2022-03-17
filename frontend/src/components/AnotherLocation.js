@@ -3,9 +3,16 @@ import SidebarCategory from './SidebarCategory';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlassLocation } from '@fortawesome/free-solid-svg-icons'
 
+
+
 const AnotherLocation = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log('Submited');
+  }
+
   return (
-    <form action="#" className='another-location'>
+    <form className='another-location' onSubmit={handleSearch}>
         <SidebarCategory category="Another Location" />
 
         <div className="search">
