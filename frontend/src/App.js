@@ -1,5 +1,6 @@
 import React from 'react';
-import CurrentWeather from './components/CurrentWeather.js'
+import Main from './components/Main';
+import SideBar from './components/SideBar';
 // import { useGetYourCurrentWeatherQuery } from './features/weatherApi'
 
 // let myPosition = { lat:"", lon: ""}
@@ -14,7 +15,8 @@ function App() {
 
   return (
     <div className="App">
-      <CurrentWeather />
+      <Main />
+      <SideBar />
     </div>
   );
 }
