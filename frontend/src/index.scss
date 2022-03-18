@@ -194,6 +194,41 @@ code {
     }
     .next-7days{
       margin-bottom: 50px;
+
+      .days{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        
+        .day{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-height: 50px;
+          background: #0003;
+          padding: 10px 20px;
+          box-sizing: border-box;
+          border-radius: 5px;
+          gap: 25px;
+          color: $normalWhite;
+
+          &:hover{
+            color: $activeWhite;
+          }
+          .dayName{
+            flex: 1;
+          }
+          img{
+            height: 50px;
+          }
+          .minmax{
+            display: flex;
+            gap: 20px;
+            width: 60px;
+            justify-content: center;
+          }
+        }
+      }
     }
   }
 

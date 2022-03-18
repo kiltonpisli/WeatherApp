@@ -13,7 +13,6 @@ const unixToTime = (unix) => {
 }
 
 const WeatherDetails = (props) => {
-    console.log(props);
   return (
     <div className='weather-details'>
         <SidebarCategory category="Weather Details" />
@@ -57,12 +56,12 @@ const WeatherDetails = (props) => {
             <div className="box">
                 <FontAwesomeIcon icon={faSun} />
                 <p>Sunrise</p>
-                <h4>{unixToTime(props.data.sunrise)}</h4>
+                <h4>{unixToTime(props.data.sys.sunrise)}</h4>
             </div>
             <div className="box">
                 <FontAwesomeIcon icon={faMoon} />
                 <p>Sunset</p>
-                <h4>{unixToTime(props.data.sunset)}</h4>
+                <h4>{unixToTime(props.data.sys.sunset)}</h4>
             </div>
         </div>
     </div>

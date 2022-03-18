@@ -10,13 +10,13 @@ export const weatherApi = createApi({
       query: ({lat, lon}) => `/weather?appid=${process.env.REACT_APP_WEATHER_API_KEY}&lat=${lat}&lon=${lon}&units=metric`,
     }),
     getSearchCurrentWeather: builder.query({
-      query: (city) => `/weather?appid=&q=${city}&units=metric`,
+      query: (city) => `/weather?appid=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&units=metric`,
     }),
     getYourNext7DaysWeather: builder.query({
-      query: ({lat, lon}) => `/daily?appid=&lat=${lat}&lon=${lon}&units=metric&cnt=8`,
+      query: ({lat, lon}) => `/forecast/daily?appid=${process.env.REACT_APP_WEATHER_API_KEY}&lat=${lat}&lon=${lon}&units=metric&cnt=8`,
     }),
     getSearchNext7DaysWeather: builder.query({
-      query: (city) => `/daily?appid=&q=${city}&units=metric&cnt=8`,
+      query: (city) => `/forecast/daily?appid=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&units=metric&cnt=8`,
     }),
   }),
 })

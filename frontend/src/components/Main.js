@@ -15,23 +15,24 @@ const dateString = () => {
 }
 
 const Main = (props) => {
+  const icon = `http://openweathermap.org/img/wn/${props.mainData.weather[0].icon}@2x.png`;
   
   return (
     <div className='main'>
         <h3 className="title">Beder Weather App</h3>
 
         <div className="current-weather">
-            <h1 className="deg">{Math.floor(props.mainData.temp)} <sup>&deg;</sup></h1>
+            <h1 className="deg">{Math.floor(props.mainData.main.temp)} <sup>&deg;</sup></h1>
             <div className="location-time">
-                <h2 className="location">{props.mainData.city}</h2>
+                <h2 className="location">{props.mainData.name}</h2>
                 <p className="time">{dateString()}</p>
                 {/* // 06:09 - Monday, 9 Sep 2022 */}
             </div>
             <div className="details">
                 <div className="img">
-                  <img src={props.mainData.icon} alt="" />
+                  <img src={icon} alt="" />
                 </div>
-                <p>{props.mainData.weather.description}</p>
+                <p>{props.mainData.weather[0].description}</p>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ const SideBar = (props) => {
     <div className='sidebar'>
         <AnotherLocation />
         <WeatherDetails data={props.weatherDetailsData}/>
-        <Next7Days />
+        <Next7Days data={props.sevenDaysData}/>
     </div>
   )
 }
