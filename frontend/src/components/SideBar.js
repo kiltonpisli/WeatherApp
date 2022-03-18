@@ -3,11 +3,11 @@ import AnotherLocation from './AnotherLocation';
 import WeatherDetails from './WeatherDetails';
 import Next7Days from './Next7Days';
 
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <div className='sidebar'>
         <AnotherLocation />
-        <WeatherDetails />
+        <WeatherDetails data={props.weatherDetailsData}/>
         <Next7Days />
     </div>
   )
