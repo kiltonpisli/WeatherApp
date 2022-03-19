@@ -15,7 +15,8 @@ const Next7Days = (props) => {
 
         <div className="days">
         
-          {props.data.list.map((day, i) => {
+          {// eslint-disable-next-line array-callback-return
+          props.data.list.map((day, i) => {
             if(i !== 0){
               const icon = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
               return (

@@ -6,7 +6,7 @@ import Next7Days from './Next7Days';
 const SideBar = (props) => {
   return (
     <div className='sidebar'>
-        <AnotherLocation />
+        <AnotherLocation onSearch={props.onSearch}/>
         <WeatherDetails data={props.weatherDetailsData}/>
         <Next7Days data={props.sevenDaysData}/>
     </div>
