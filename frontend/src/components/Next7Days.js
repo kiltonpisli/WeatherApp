@@ -15,11 +15,11 @@ const Next7Days = (props) => {
 
         <div className="days">
         
-          {props.data.list.map((day, i) => {
+          {props.data.list?.map((day, i) => {
             if(i !== 0){
               const icon = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
               return (
-                <div className="day">
+                <div className="day" key={i}>
                   <h3 className="dayName">{unixToDay(day.dt)}</h3>
                   <img src={icon} alt="" />
                   <div className="minmax">
