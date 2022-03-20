@@ -263,6 +263,7 @@ code {
     
 
     .main{
+      height: calc(100vh - 50px);
       padding: 20px;
       padding-bottom: 70px;
       min-width: auto;
