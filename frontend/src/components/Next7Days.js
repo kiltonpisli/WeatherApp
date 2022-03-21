@@ -1,12 +1,6 @@
 import React from 'react'
+import {unixToDay} from '../features/functions';
 import SidebarCategory from './SidebarCategory';
-
-const unixToDay = (unix) => {
-  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const date = new Date(unix * 1000);
-
-  return dayNames[date.getDay()];
-}
 
 const Next7Days = (props) => {  
   return (

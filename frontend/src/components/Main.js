@@ -1,18 +1,6 @@
 import React from 'react'
+import {mainDateString} from '../features/functions';
 
-const dateString = () => {
-  const cDate = new Date();
-  const h = (cDate.getHours()<10)?"0"+cDate.getHours():cDate.getHours();
-  const m = (cDate.getMinutes()<10)?"0"+cDate.getMinutes():cDate.getMinutes();
-  let day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  day = day[cDate.getDay()];
-  const date = cDate.getDate();
-  let month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
-  month = month[cDate.getMonth()];
-  const year = cDate.getFullYear();
-
-  return h+':'+m+ " - " +day+", "+date+" "+month+" "+year;
-}
 
 const Main = (props) => {
   const icon = `http://openweathermap.org/img/wn/${props.mainData.weather[0].icon}@2x.png`;
@@ -25,7 +13,7 @@ const Main = (props) => {
             <h1 className="deg">{Math.floor(props.mainData.main.temp)} <sup>&deg;</sup></h1>
             <div className="location-time">
                 <h2 className="location">{props.mainData.name}, {props.mainData.sys.country}</h2>
-                <p className="time">{dateString()}</p>
+                <p className="time">{mainDateString(props.mainData.dt)}</p>
                 {/* // 06:09 - Monday, 9 Sep 2022 */}
             </div>
             <div className="details">

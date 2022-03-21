@@ -1,16 +1,8 @@
 import React from 'react'
+import {unixToTime} from '../features/functions';
 import SidebarCategory from './SidebarCategory'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTemperatureHalf, faTemperatureArrowDown, faTemperatureArrowUp, faWind, faDroplet, faGaugeHigh, faEye,faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
-
-const unixToTime = (unix) => {
-    var date = new Date(unix * 1000);
-    var hours = "0" + date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-
-    return hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-}
 
 const WeatherDetails = (props) => {
   return (
