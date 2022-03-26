@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Loader from './components/Loader';
 import Main from './components/Main';
 import SideBar from './components/SideBar';
 import { useGetYourCurrentWeatherQuery, useGetYourNext7DaysWeatherQuery, useGetSearchCurrentWeatherQuery, useGetSearchNext7DaysWeatherQuery } from './features/weatherApi'
@@ -31,14 +32,14 @@ function App() {
       // console.log(currentWeather);
       return setCurrentWeather(currentWeatherData);
     }
-  }, [search, currentWeather, currentWeatherData, succCW]);
+  }, [search, currentWeatherData, succCW]);
 
   useEffect(() => {
     if(succ7D && search===""){
       // console.log(sevenDays);
       return setSevenDays(sevenDaysData);
     }
-  }, [search, sevenDays, sevenDaysData, succ7D]);
+  }, [search, sevenDaysData, succ7D]);
 
   useEffect(() => {
     if(loadingCW || loading7D || loadingSCW || loadingS7D){
@@ -69,9 +70,9 @@ function App() {
   
 
   if(isLoading){
-    return (<h1>Loading...</h1>);
-  }else if(errorCW || error7D){
-    return (<h1>ERROR...</h1>);
+    return (<Loader />);
+  // }else if(errorCW || error7D){
+  //   return (<h1>ERROR...</h1>);
   }else{
     return (
       <div className="App">
