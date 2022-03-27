@@ -1,4 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import img1 from './img/cloudy.jpeg';
+import img2 from './img/rainy.jpeg';
+import img3 from './img/sunny.jpeg';
+import img4 from './img/sunny 2.jpeg';
+import img5 from './img/sunny 3.jpeg';
 import Loader from './components/Loader';
 import Main from './components/Main';
 import SideBar from './components/SideBar';
@@ -17,6 +22,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
 });
 
 function App() {
+  const bgImg = [img1, img2, img3, img4, img5];
+  document.body.style.backgroundImage = `url('${bgImg[0]}')`;
+  
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [currentWeather, setCurrentWeather] = useState({});
@@ -27,20 +35,7 @@ function App() {
   const {data: searchCW, isLoading: loadingSCW, isError: errorSCW, isSuccess: succSCW} = useGetSearchCurrentWeatherQuery(search, {skip: search===""});
   const {data: search7D, isLoading: loadingS7D, isError: errorS7D, isSuccess: succS7D} = useGetSearchNext7DaysWeatherQuery(search, {skip: search===""});
 
-  useEffect(() => {
-    if(succCW && search===""){
-      // console.log(currentWeather);
-      return setCurrentWeather(currentWeatherData);
-    }
-  }, [search, currentWeatherData, succCW]);
-
-  useEffect(() => {
-    if(succ7D && search===""){
-      // console.log(sevenDays);
-      return setSevenDays(sevenDaysData);
-    }
-  }, [search, sevenDaysData, succ7D]);
-
+  //loading hook
   useEffect(() => {
     if(loadingCW || loading7D || loadingSCW || loadingS7D){
       return setIsLoading(true);
@@ -49,30 +44,35 @@ function App() {
     }
   }, [loading7D, loadingCW, loadingS7D, loadingSCW]);
 
+  //your weather hook
+  useEffect(() => {
+    if(succCW && search===""){
+      return setCurrentWeather(currentWeatherData);
+    }
+  }, [search, currentWeatherData, succCW]);
+  useEffect(() => {
+    if(succ7D && search===""){
+      return setSevenDays(sevenDaysData);
+    }
+  }, [search, sevenDaysData, succ7D]);
+
+  //from search hook
   const onSearch = (str) => {
     setSearch(str);
   }
-
   useEffect(() => {
     if(succSCW && search!==""){
       setCurrentWeather(searchCW);
-      // setSevenDays(search)
     }
   }, [search, searchCW, succSCW])
-
   useEffect(() => {
     if(succS7D && search!==""){
       setSevenDays(search7D);
-      // setSevenDays(search)
     }
   }, [search, search7D, succS7D])
   
-  
-
   if(isLoading){
     return (<Loader />);
-  // }else if(errorCW || error7D){
-  //   return (<h1>ERROR...</h1>);
   }else{
     return (
       <div className="App">
