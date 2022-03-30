@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import img1 from './img/cloudy.jpeg';
 import img2 from './img/rainy.jpeg';
 import img3 from './img/sunny.jpeg';
@@ -21,11 +21,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
   }
 });
 
-function App() {
-  const bgImg = [img1, img2, img3, img4, img5];
-  document.body.style.backgroundImage = `url('${bgImg[0]}')`;
-  
+function App() {  
   const [isLoading, setIsLoading] = useState(true);
+  const [bgImg, setBgImg] = useState(img1);
   const [search, setSearch] = useState("");
   const [currentWeather, setCurrentWeather] = useState({});
   const [sevenDays, setSevenDays] = useState({});
@@ -44,6 +42,35 @@ function App() {
     }
   }, [loading7D, loadingCW, loadingS7D, loadingSCW]);
 
+  // bg change hook
+  const isInitialMount = useRef(true);
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {     
+      // "currentWeather.weather[0]" response: {
+        //   "id": 803,
+        //   "main": "Clouds",
+        //   "description": "broken clouds",
+        //   "icon": "04n"}
+        
+        // Group 2xx: Thunderstorm
+        // Group 3xx: Drizzle
+        // Group 5xx: Rain
+        // Group 6xx: Snow
+        // Group 7xx: Atmosphere (mist, smoke ...)
+        // Group 800: Clear
+        // Group 80x: Clouds
+      if(currentWeather.weather[0].main === "Clouds"){
+        setBgImg(img1);
+      }else{
+        setBgImg(img2);
+      }
+
+      document.body.style.backgroundImage = `url('${bgImg}')`;
+    }
+  }, [bgImg, currentWeather])
+  
   //your weather hook
   useEffect(() => {
     if(succCW && search===""){
