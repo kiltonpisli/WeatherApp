@@ -1,13 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
-import img1 from './img/cloudy.jpeg';
-import img2 from './img/rainy.jpeg';
-import img3 from './img/sunny.jpeg';
-import img4 from './img/sunny 2.jpeg';
-import img5 from './img/sunny 3.jpeg';
+import {thunderstorm_d, thunderstorm_n, drizzle_d, drizzle_n, rainy_d, rainy_n, snow_d, snow_n, atmosphere_d, atmosphere_n, clear_d, clear_n, cloudy_d, cloudy_n} from './components/bgImg';
 import Loader from './components/Loader';
 import Main from './components/Main';
 import SideBar from './components/SideBar';
 import { useGetYourCurrentWeatherQuery, useGetYourNext7DaysWeatherQuery, useGetSearchCurrentWeatherQuery, useGetSearchNext7DaysWeatherQuery } from './features/weatherApi'
+
 //{lat:"41.2942336", lon: "19.9032832"}
 var myPosition = {lat:41.29423, lon:19.90328};
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -23,15 +20,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 function App() {  
   const [isLoading, setIsLoading] = useState(true);
-  const [bgImg, setBgImg] = useState(img1);
+  const [bgImg, setBgImg] = useState(atmosphere_n);
   const [search, setSearch] = useState("");
   const [currentWeather, setCurrentWeather] = useState({});
   const [sevenDays, setSevenDays] = useState({});
 
-  const {data: currentWeatherData, isLoading: loadingCW, isError: errorCW, isSuccess: succCW} = useGetYourCurrentWeatherQuery(myPosition);
-  const {data: sevenDaysData, isLoading: loading7D, isError: error7D, isSuccess: succ7D} = useGetYourNext7DaysWeatherQuery(myPosition);
-  const {data: searchCW, isLoading: loadingSCW, isError: errorSCW, isSuccess: succSCW} = useGetSearchCurrentWeatherQuery(search, {skip: search===""});
-  const {data: search7D, isLoading: loadingS7D, isError: errorS7D, isSuccess: succS7D} = useGetSearchNext7DaysWeatherQuery(search, {skip: search===""});
+  const {data: currentWeatherData, isLoading: loadingCW, isSuccess: succCW} = useGetYourCurrentWeatherQuery(myPosition);
+  const {data: sevenDaysData, isLoading: loading7D, isSuccess: succ7D} = useGetYourNext7DaysWeatherQuery(myPosition);
+  const {data: searchCW, isLoading: loadingSCW, isSuccess: succSCW} = useGetSearchCurrentWeatherQuery(search, {skip: search===""});
+  const {data: search7D, isLoading: loadingS7D, isSuccess: succS7D} = useGetSearchNext7DaysWeatherQuery(search, {skip: search===""});
 
   //loading hook
   useEffect(() => {
@@ -53,20 +50,31 @@ function App() {
         //   "main": "Clouds",
         //   "description": "broken clouds",
         //   "icon": "04n"}
+      const isDay = currentWeather.weather[0].icon.includes('d') ? true : false;
         
+      if(currentWeather.weather[0].main === "Thunderstorm"){
         // Group 2xx: Thunderstorm
+        isDay ? setBgImg(thunderstorm_d): setBgImg(thunderstorm_n);
+      }else if(currentWeather.weather[0].main === "Drizzle"){
         // Group 3xx: Drizzle
+        isDay ? setBgImg(drizzle_d): setBgImg(drizzle_n);
+      }else if(currentWeather.weather[0].main === "Rain"){
         // Group 5xx: Rain
+        isDay ? setBgImg(rainy_d): setBgImg(rainy_n);
+      }else if(currentWeather.weather[0].main === "Snow"){
         // Group 6xx: Snow
-        // Group 7xx: Atmosphere (mist, smoke ...)
+        isDay ? setBgImg(snow_d): setBgImg(snow_n);
+      }else if(currentWeather.weather[0].main === "Clear"){
         // Group 800: Clear
+        isDay ? setBgImg(clear_d): setBgImg(clear_n);
+      }else if(currentWeather.weather[0].main === "Clouds"){
         // Group 80x: Clouds
-      if(currentWeather.weather[0].main === "Clouds"){
-        setBgImg(img1);
+        isDay ? setBgImg(cloudy_d): setBgImg(cloudy_n);
       }else{
-        setBgImg(img2);
+        // Group 7xx: Atmosphere (mist, smoke ...)
+        isDay ? setBgImg(atmosphere_d): setBgImg(atmosphere_n);
       }
-
+      // console.log(currentWeather.weather[0].main, bgImg);
       document.body.style.backgroundImage = `url('${bgImg}')`;
     }
   }, [bgImg, currentWeather])
